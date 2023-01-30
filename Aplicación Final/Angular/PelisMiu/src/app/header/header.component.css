@@ -1,10 +1,46 @@
-a{
-    text-decoration: none;
-    color: blue;
-    background-color: black;
+div{
+    display: flex;
+    align-items: center;
+    width: auto;
 }
 
-myClas{
-    
-    background-color: black;
+ul{
+    width: 100%;
+    display: flex;
+    float: left;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    line-height: 1.42857143;
+    background-color: #1a4d8d;
+    align-items: center;
+
+}
+
+li{
+    display: flex;
+    float: left;
+    position: relative;
+    display: block;
+    width: 8.8%;
+    text-align: center;
+    list-style: none;
+    text-align: center;
+}
+
+a{  
+    text-decoration: none;
+    color: white;
+    background-color: transparent;
+    padding-top: 1.4em;
+    padding-bottom: 1.4em;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    width: 100%;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    position: relative;
+    font-size: 1.1vw;
+
 }
