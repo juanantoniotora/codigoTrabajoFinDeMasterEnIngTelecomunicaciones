@@ -1,0 +1,35 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+import { DashboardComponent } from './componentesIndependientes/dashboard/dashboard.component';
+import { ErrorComponent } from './componentesIndependientes/error/error.component';
+import { LoginComponent } from './componentesIndependientes/login/login.component';
+import { RecuperarPasswordComponent } from './componentesIndependientes/recuperar-password/recuperar-password.component';
+import { RegistrarUsuarioComponent } from './componentesIndependientes/registrar-usuario/registrar-usuario.component';
+import { VerificarCorreoComponent } from './componentesIndependientes/verificar-correo/verificar-correo.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    DashboardComponent,
+    ErrorComponent,
+    LoginComponent,
+    RecuperarPasswordComponent,
+    RegistrarUsuarioComponent,
+    VerificarCorreoComponent,
+    SpinnerComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
