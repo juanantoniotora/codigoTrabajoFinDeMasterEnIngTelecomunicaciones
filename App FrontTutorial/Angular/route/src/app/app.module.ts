@@ -11,6 +11,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { ErrorPersonalizadoComponent } from './error-personalizado/error-personalizado.component';
+
+import { provideAuth, getAuth } from '@angular/fire/auth'
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -18,7 +25,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AppComponent,
     HeaderComponent,
     CreateComponenteComponent,
-    ListaComponenteComponent
+    ListaComponenteComponent,
+    LoginComponent,
+    LogoutComponent,
+    ErrorPersonalizadoComponent
   ],
   imports: [
     BrowserModule,
