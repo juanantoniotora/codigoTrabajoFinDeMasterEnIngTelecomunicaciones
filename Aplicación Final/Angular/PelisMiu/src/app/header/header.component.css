@@ -68,3 +68,11 @@ a{
 .liemzoPaginaCompleta{
     background-color: black;
 }
+
+.punteroMauseDefault{
+    cursor: default;
+}
+
+.punteroMausePointer{
+    cursor: pointer;
+}
