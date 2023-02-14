@@ -13,6 +13,10 @@ import { RegistrarUsuarioComponent } from './componentesIndependientes/registrar
 import { VerificarCorreoComponent } from './componentesIndependientes/verificar-correo/verificar-correo.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 
+import { AngularFireModule } from '@angular/fire/compat'
+import { environment } from 'src/environments/environment';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +31,8 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

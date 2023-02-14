@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AngularFireAuth} from '@angular/fire/compat/auth'
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -10,7 +11,9 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   registrarUsuario : FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private afAuth : AngularFireAuth) {
+
     this.registrarUsuario = this.fb.group({
       email : ['', Validators.required],
       password : ['', Validators.required],
@@ -28,5 +31,24 @@ export class RegistrarUsuarioComponent implements OnInit {
     const repetirPassword = this.registrarUsuario.value.repetirPassword;
     
     console.log(email, password, repetirPassword);
+
+    //crear usuario con email y password
+    this.afAuth.createUserWithEmailAndPassword(email, password).then((user) => {
+      console.log(user);
+    }).catch((error) => {
+      console.log(error);
+      alert(this.firebaseError(error.code))
+    })
+  }
+
+  firebaseError(code:String){
+    switch(code){
+      case 'auth/email-already-in-use':
+        return 'El usuario ya existe'
+      case 'auth/invalid-email':
+        return 'La contraseña es muy débil'
+      default: 
+        return 'Error desconocido'
+    }
   }
 }
