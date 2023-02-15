@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AngularFireAuth} from '@angular/fire/compat/auth'
+import { Router } from '@angular/router';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -9,16 +11,19 @@ import { AngularFireAuth} from '@angular/fire/compat/auth'
 })
 export class RegistrarUsuarioComponent implements OnInit {
 
+  loading : boolean = false;
   registrarUsuario : FormGroup;
 
   constructor(private fb: FormBuilder,
-              private afAuth : AngularFireAuth) {
+              private afAuth : AngularFireAuth,
+              private router : Router) {
 
     this.registrarUsuario = this.fb.group({
       email : ['', Validators.required],
       password : ['', Validators.required],
       repetirPassword : ['', Validators.required],
     })
+    this.loading = false;
    }
 
   ngOnInit(): void {
@@ -31,11 +36,18 @@ export class RegistrarUsuarioComponent implements OnInit {
     const repetirPassword = this.registrarUsuario.value.repetirPassword;
     
     console.log(email, password, repetirPassword);
-
+    
+    this.loading = true;
     //crear usuario con email y password
-    this.afAuth.createUserWithEmailAndPassword(email, password).then((user) => {
+    this.afAuth.createUserWithEmailAndPassword(email, password).then(async (user) => {
       console.log(user);
-    }).catch((error) => {
+      this.loading=false;
+      await this.delay(1000);
+      this.router.navigate(['/login'])
+    }).catch(async (error) => {
+      this.loading=true;
+      await this.delay(1000);
+      this.loading=false;
       console.log(error);
       alert(this.firebaseError(error.code))
     })
@@ -45,10 +57,20 @@ export class RegistrarUsuarioComponent implements OnInit {
     switch(code){
       case 'auth/email-already-in-use':
         return 'El usuario ya existe'
+      case 'auth/weak-password':
+        return 'La contaseña es muy débil'
       case 'auth/invalid-email':
-        return 'La contraseña es muy débil'
+        return 'Correo inválido'
       default: 
         return 'Error desconocido'
     }
   }
+
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
 }
+}
+
+
+

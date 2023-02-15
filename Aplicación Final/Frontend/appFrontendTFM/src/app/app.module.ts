@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
+
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire/compat'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { AppComponent } from './app.component';
 import { DashboardComponent } from './componentesIndependientes/dashboard/dashboard.component';
 import { ErrorComponent } from './componentesIndependientes/error/error.component';
 import { LoginComponent } from './componentesIndependientes/login/login.component';
@@ -13,7 +15,6 @@ import { RegistrarUsuarioComponent } from './componentesIndependientes/registrar
 import { VerificarCorreoComponent } from './componentesIndependientes/verificar-correo/verificar-correo.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 
-import { AngularFireModule } from '@angular/fire/compat'
 import { environment } from 'src/environments/environment';
 
 
@@ -26,13 +27,15 @@ import { environment } from 'src/environments/environment';
     RecuperarPasswordComponent,
     RegistrarUsuarioComponent,
     VerificarCorreoComponent,
-    SpinnerComponent
+    SpinnerComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
