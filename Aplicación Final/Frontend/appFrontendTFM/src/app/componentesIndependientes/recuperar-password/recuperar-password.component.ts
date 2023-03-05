@@ -22,7 +22,7 @@ export class RecuperarPasswordComponent implements OnInit {
     private router : Router
   ) {
     this.recuperarUsuario = this.fb.group({
-      correo : ['', Validators.required],
+      correo : ['', [Validators.required, Validators.email]],
     })
     this.loading = false;
     this.mostrarMensajeErrorRegistro = false;
@@ -33,7 +33,7 @@ export class RecuperarPasswordComponent implements OnInit {
   }
 
   recuperar(){
-    console.log("1");
+    console.log(this.recuperarUsuario)
     const email = this.recuperarUsuario.value.correo;
     console.log(email);
     this.loading = true;

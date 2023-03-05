@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private router : Router
   ) {
     this.loginUsuario = this.fb.group({
-      email : ['', Validators.required],
+      email : ['', [Validators.required, Validators.email]],
       password : ['', Validators.required],
     })
     this.loading = false;

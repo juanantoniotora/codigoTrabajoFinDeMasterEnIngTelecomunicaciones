@@ -27,8 +27,8 @@ export class RegistrarUsuarioComponent implements OnInit {
     private router : Router
   ) {
     this.registrarUsuario = this.fb.group({
-      email : ['', Validators.required],
-      password : ['', Validators.required],
+      email : ['', [Validators.required, Validators.email]],
+      password : ['', [Validators.required, Validators.minLength(6)]],
       repetirPassword : ['', Validators.required],
     })
     this.loading = false;
@@ -67,7 +67,8 @@ export class RegistrarUsuarioComponent implements OnInit {
     else{
       //crear usuario con email y password
       this.afAuth.createUserWithEmailAndPassword(email, password).then(async (user) => {
-        console.log(user);
+        console.log(this.registrarUsuario)
+        //console.log(user);
         this.loading=false;
         
         this.mostrarMensajeErrorRegistro=false;
@@ -77,7 +78,7 @@ export class RegistrarUsuarioComponent implements OnInit {
         await this.delay(2000);
         this.router.navigate(['/login'])
       }).catch(async (error) => {
-        console.log("jjj")
+        console.log(this.registrarUsuario)
         this.loading=true;
         await this.delay(1000);
         this.loading=false;
