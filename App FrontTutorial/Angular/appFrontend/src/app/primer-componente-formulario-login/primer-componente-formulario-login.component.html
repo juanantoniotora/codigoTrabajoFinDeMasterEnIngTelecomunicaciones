@@ -1,0 +1,96 @@
+
+<table border>
+    <tr>
+        <td>
+            <p>[Frase inicial del "primer-componente-formulario-login"].</p>
+            <p> 
+                User Name
+            </p>
+            <input type="text" name="userName">
+            <p>
+                Password
+            </p>
+            <input type="text" name="password">
+            <p>
+                <button (click)="alertaDeEnvioFormulario()"> 
+                    Entrar 
+                </button>
+            </p>
+        
+            <!-- Recepcion de datos con @Input: desde componente padre a componente hijo -->
+            <p>{{datosRecibidosEnCompHijo}}</p>
+        
+            <!-- Envio de datos con @Output:    desde componente hijo a componente padre, con evento click -->
+            <button (click)="enviarDatosHaciaAppComponentAlGenerarEvento()">
+                DATOS DEL HIJO, RECIBIDOS Y ESCRITOS EN EL COMP. PADRE.
+            </button>
+            <br><br>
+            <!-- Mensaje de error en la petición GET de HTML impreso por pantalla -->
+            Mis usuarios conseguidos son: {{usuariosConseguidos}}
+            <br>
+            Mis errores de la petición GET HTTP son: {{errorMessage}}
+        </td>
+
+        <!-- Formulario para las pruebas de la interpolación y el Binding -->
+        <td>
+            <p style="padding-right: 2em;">
+                Formulario para Interpolación y Binding
+            </p>
+            <p> 
+                User Name
+            </p>
+            <input type="text" [(ngModel)]="salidaDobleDatabingFieldUsername" #recogidaUserName name="userName2" [value]="userNameDefault">
+            <p>
+                Password
+            </p>
+            <input type="text" #recogidaPassword name="password2" [value]="passwordDefault">
+            <p>
+                <button (click)="fActualizarInfoEstadoEnvio(recogidaUserName.value)"> 
+                    Entrar 
+                </button>
+                <br>
+                {{statusDeEnvioFormulario}}
+                <br><br>
+                <button (click)="fDefaultForm()"> 
+                    Poner valores Default en formulario 
+                </button>
+
+                <!-- Parte de la salida del doble Databinding -->
+                <br><br>
+                El texto de la input text del USER NAME es: <br>
+                {{salidaDobleDatabingFieldUsername}}
+
+
+            </p>
+            
+        </td>
+    </tr>
+    <br>
+
+    <!-- Codigo de directiva ngIf -->
+    <div *ngIf="variableBooleanaNgIf; then formularioNgIfTrue; else formularioNgIfFalse">
+    </div>
+    <ng-template #formularioNgIfTrue>
+        <div> La directiva ngIf es true.</div>
+    </ng-template>
+    <ng-template #formularioNgIfFalse>
+        <div> La directiva ngIf es false.</div>
+    </ng-template>
+    
+    <!-- Codifo de directiva ngSwitch -->
+    <div [ngSwitch]="variableStringNgSwitch">
+        <div *ngSwitchCase="'OK'"> Switch Case tipo OK seleccionado.</div>
+        <div *ngSwitchCase="'FAIL'"> Switch Case tipo FAIL seleccionado.</div>
+        <div *ngSwitchDefault> Switch Case ROTO.</div>
+    </div>    
+
+    <!-- Codifo de directiva ngFor -->
+    Coleccion de nombres ejecutada con directiva ngFor:
+    <div *ngFor="let nombre of coleccionNombresNgFor">
+        {{nombre}}
+    </div>
+
+    
+
+</table>
+    

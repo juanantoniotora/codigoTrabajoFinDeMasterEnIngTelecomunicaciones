@@ -1,0 +1,6 @@
+[
+    {"id":0, "name":"Pedro", "fechaInscripcion":"02-01-2022"},
+    {"id":1, "name":"Paco",  "fechaInscripcion":"15-07-2022"},
+    {"id":2, "name":"Pepe",  "fechaInscripcion":"20-12-2022"},
+    {"id":3, "name":"NUEVO",  "fechaInscripcion":"21-12-2022"}
+]
