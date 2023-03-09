@@ -14,7 +14,7 @@ const routes: Routes = [
   {path:'signup',             component : RegistrarUsuarioComponent},
   {path:'recuperar-password', component: RecuperarPasswordComponent},
   {path:'dashboard',          component : DashboardComponent},
-  {path:'verficar-correo',    component : VerificarCorreoComponent},
+  {path:'verificar-correo',    component : VerificarCorreoComponent},
   {path:'',                   redirectTo: '/inicio', pathMatch: 'full'},
   {path :'**',                component : ErrorComponent}
 ]

@@ -17,6 +17,10 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 import { environment } from 'src/environments/environment';
 
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button'; 
+
+
 
 @NgModule({
   declarations: [
@@ -35,7 +39,9 @@ import { environment } from 'src/environments/environment';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatMenuModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

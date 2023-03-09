@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     private router : Router
   ) {
     this.loginUsuario = this.fb.group({
-      email : ['', Validators.required],
+      email : ['', [Validators.required, Validators.email]],
       password : ['', Validators.required],
     })
     this.loading = false;
@@ -36,17 +36,21 @@ export class LoginComponent implements OnInit {
   login(){
     const email = this.loginUsuario.value.email;
     const password = this.loginUsuario.value.password;
-    console.log(email, password);
 
     this.loading = true;
+
     this.afAuth.signInWithEmailAndPassword(email, password).then((user)=>{
-      console.log(user);
-      this.router.navigate(['/dashboard'])
+      console.log(user)
+      if(user.user?.emailVerified){
+        this.router.navigate(['/dashboard'])
+      }
+      else{
+        this.router.navigate(['/verificar-correo'])
+      }
     }).catch((error)=>{
       this.loading = false;
       console.log('error');
       this.loading=false;
-      console.log(error);
       this.mostrarMensajeErrorRegistro=true;
       this.mostrarMensajeExitoRegistro=false;
       this.mensajeInfo=this.firebaseError(error.code)
