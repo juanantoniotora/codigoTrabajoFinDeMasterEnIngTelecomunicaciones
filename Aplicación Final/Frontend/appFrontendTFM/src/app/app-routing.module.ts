@@ -8,14 +8,15 @@ import { RecuperarPasswordComponent } from './componentesIndependientes/recupera
 import { RegistrarUsuarioComponent } from './componentesIndependientes/registrar-usuario/registrar-usuario.component';
 import { VerificarCorreoComponent } from './componentesIndependientes/verificar-correo/verificar-correo.component';
 
+import { GuardianSiNoLogeado } from './componentesIndependientes/login/guardian-si-no-logeado';
+
 const routes: Routes = [
-  {path:'inicio',             component : LoginComponent},
   {path:'login',              component : LoginComponent},
   {path:'signup',             component : RegistrarUsuarioComponent},
   {path:'recuperar-password', component: RecuperarPasswordComponent},
-  {path:'dashboard',          component : DashboardComponent},
+  {path:'dashboard',          component : DashboardComponent, canActivate:[GuardianSiNoLogeado]},
   {path:'verificar-correo',    component : VerificarCorreoComponent},
-  {path:'',                   redirectTo: '/inicio', pathMatch: 'full'},
+  {path:'',                   redirectTo: '/dashboard', pathMatch: 'full'},
   {path :'**',                component : ErrorComponent}
 ]
 
