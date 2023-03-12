@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button'; 
 
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatMenuModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
