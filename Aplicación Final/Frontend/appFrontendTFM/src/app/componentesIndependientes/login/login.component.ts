@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -16,10 +17,13 @@ export class LoginComponent implements OnInit {
   mensajeInfo : String = "";
   loginUsuario : FormGroup;
 
+  JWTUsuario : string = "";
+
   constructor(
     private fb: FormBuilder,
     private afAuth : AngularFireAuth,
-    private router : Router
+    private router : Router,
+    private cookie : CookieService
   ) {
     this.loginUsuario = this.fb.group({
       email : ['', [Validators.required, Validators.email]],
@@ -31,18 +35,32 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    // Si estoy logeado no dejo ver este componente y me vuelvo al Dashboard
+    if(this.cookie.get("JWT_PelisMiu")!=""){
+      this.router.navigate(["dashboard"])
+    }
   }
 
   login(){
     const email = this.loginUsuario.value.email;
     const password = this.loginUsuario.value.password;
-
     this.loading = true;
-
     this.afAuth.signInWithEmailAndPassword(email, password).then((user)=>{
-      console.log(user)
+      //console.log(user)
       if(user.user?.emailVerified){
-        this.router.navigate(['/dashboard'])
+        /**
+         * Recuperamos el JWT del usuario, recien conseguido al iniciar sesión
+         */
+        user.user.getIdToken().then(token=>{
+          this.JWTUsuario = token;
+          console.log("Propiedad <JWTUsuario> antes de salir de componente <login>: \n" + this.JWTUsuario);
+          
+          this.cookie.set("JWT_PelisMiu", this.JWTUsuario);
+          const a = this.cookie.get("JWT_PelisMiu");
+          console.log("\n\nValor de la cookie antes de salir del componente <login>: " + a)
+          
+          this.router.navigate(['/dashboard']);
+        });
       }
       else{
         this.router.navigate(['/verificar-correo'])

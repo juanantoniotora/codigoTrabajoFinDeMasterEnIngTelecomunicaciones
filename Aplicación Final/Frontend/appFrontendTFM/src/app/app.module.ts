@@ -20,6 +20,8 @@ import { environment } from 'src/environments/environment';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button'; 
 
+import { CookieService } from 'ngx-cookie-service';
+import { GuardianSiNoLogeado } from './componentesIndependientes/login/guardian-si-no-logeado';
 
 
 @NgModule({
@@ -43,7 +45,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatMenuModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [CookieService, GuardianSiNoLogeado],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
